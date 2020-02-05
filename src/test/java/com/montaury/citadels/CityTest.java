@@ -4,18 +4,26 @@ import com.montaury.citadels.district.Card;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
 import org.junit.Test;
 
 import static com.montaury.citadels.district.Card.*;
 import static org.junit.Assert.*;
 
 public class CityTest {
-    @Test
-    public void test_5_types_quartiers(){
 
-        Board board = new Board();
-        City city = new City(board);
-        Possession possession = new Possession(0,null); // 0 or donc 0 score
+    Board board;
+    City city;
+
+    @Before
+    public void setUp() {
+        board = new Board();
+        city = new City(board);
+    }
+
+    @Test
+    public void test_5_types_quartiers() {
+        Possession possession = new Possession(0, null); // 0 or donc 0 score
         city.buildDistrict(Card.MANOR_1); // +3 score, type : NOBLE
         city.buildDistrict(Card.PRISON_2); // +2 score, type : MILITARY
         city.buildDistrict(Card.TAVERN_2); // +1 score, type : TRADE
@@ -28,12 +36,10 @@ public class CityTest {
     }
 
     @Test
-    public void test_bonus_carte_magique(){
-        Board myBoard = new Board();
-        City myCity = new City(myBoard);
+    public void test_bonus_carte_magique() {
         Possession laPossession = new Possession(9, HashSet.empty());
-        myCity.buildDistrict(UNIVERSITY);
-        int score = myCity.score(laPossession);
+        city.buildDistrict(UNIVERSITY);
+        int score = city.score(laPossession);
         Assertions.assertThat(score).isEqualTo(8);
     }
 }
