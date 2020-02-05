@@ -38,7 +38,7 @@ public class City {
 
         score = score + districtsScoreBonus(possession);
         if (winsAllColorBonus()) {
-            score += 5;
+            score += 3;
         }
         if (board.isFirst(this)) {
             score += (2);
