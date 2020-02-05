@@ -26,4 +26,14 @@ public class CityTest {
         int score = city.score(possession);
         Assertions.assertThat(score).isEqualTo(24); // 21 + bonus des 5 types (+3) = 24
     }
+
+    @Test
+    public void test_bonus_carte_magique(){
+        Board myBoard = new Board();
+        City myCity = new City(myBoard);
+        Possession laPossession = new Possession(9, HashSet.empty());
+        myCity.buildDistrict(UNIVERSITY);
+        int score = myCity.score(laPossession);
+        Assertions.assertThat(score).isEqualTo(8);
+    }
 }
