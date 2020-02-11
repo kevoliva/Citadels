@@ -69,12 +69,13 @@ public class City {
     }
 
     private boolean winsAllColorBonus() {
+        boolean winner;
         int districtTypes[] = new int[DistrictType.values().length];
         for (District d : districts()) {
             districtTypes[d.districtType().ordinal()]++;
         }
         if (districtTypes[DistrictType.MILITARY.ordinal()] > 0 && districtTypes[DistrictType.NOBLE.ordinal()] > 0 && districtTypes[DistrictType.RELIGIOUS.ordinal()] > 0 && districtTypes[DistrictType.SPECIAL.ordinal()] > 0 && districtTypes[DistrictType.TRADE.ordinal()] > 0)
-            return true;
+            winner= true;
 
         if (has(HAUNTED_CITY)) {
             int zeros = 0;
@@ -84,10 +85,11 @@ public class City {
                 }
             }
             if (zeros == 1 && districtTypes[DistrictType.SPECIAL.ordinal()] > 1) {
-                return true;
+                winner=  true;
             }
-            else return false;
-        } else return false;
+            else winner=  false;
+        } else winner=  false;
+        return winner;
     }
 
     public boolean has(District district) {
