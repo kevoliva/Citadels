@@ -37,9 +37,19 @@ public class CityTest {
 
     @Test
     public void test_bonus_carte_magique() {
-        Possession laPossession = new Possession(9, HashSet.empty());
+        Possession laPossession = new Possession(9, null);
         city.buildDistrict(UNIVERSITY);
         int score = city.score(laPossession);
         Assertions.assertThat(score).isEqualTo(8);
+    }
+
+    @Test
+    public void test_construction_cout(){
+        Possession possession = new Possession(0,null);
+        city.buildDistrict(Card.MANOR_5); // +3
+        city.buildDistrict(Card.TAVERN_5); // +1
+        city.buildDistrict(Card.WATCHTOWER_2); // +1
+        int score = city.score(possession);
+        Assertions.assertThat(score).isEqualTo(5);
     }
 }
