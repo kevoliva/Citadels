@@ -32,8 +32,8 @@ public class City {
 
     public int score(Possession possession) {
         int score = 0;
-        for (int a = 0; a < districts().size(); a++) {
-            score += districts().get(a).cost();
+        for (int carte = 0; carte < districts().size(); carte++) {
+            score += districts().get(carte).cost();
         }
 
         score = score + districtsScoreBonus(possession);

@@ -36,7 +36,7 @@ public class CityTest {
     }
 
     @Test
-    public void test_bonus_carte_magique() {
+    public void test_bonus_magic_card() {
         Possession laPossession = new Possession(9, null);
         city.buildDistrict(UNIVERSITY);
         int score = city.score(laPossession);
@@ -44,7 +44,7 @@ public class CityTest {
     }
 
     @Test
-    public void test_construction_cout(){
+    public void test_construction_cost(){
         Possession possession = new Possession(0,null);
         city.buildDistrict(Card.MANOR_5); // +3
         city.buildDistrict(Card.TAVERN_5); // +1
