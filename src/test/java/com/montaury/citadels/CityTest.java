@@ -44,12 +44,28 @@ public class CityTest {
     }
 
     @Test
-    public void test_construction_cost(){
-        Possession possession = new Possession(0,null);
+    public void test_construction_cost() {
+        Possession possession = new Possession(0, null);
         city.buildDistrict(Card.MANOR_5); // +3
         city.buildDistrict(Card.TAVERN_5); // +1
         city.buildDistrict(Card.WATCHTOWER_2); // +1
         int score = city.score(possession);
         Assertions.assertThat(score).isEqualTo(5);
+    }
+
+    @Test
+    public void test_plus_four_if_player_finishes_first() {
+        city.buildDistrict(Card.MARKET_3);
+        city.buildDistrict(Card.TOWN_HALL_2);
+        city.buildDistrict(Card.KEEP_2);
+        city.buildDistrict(Card.MARKET_1);
+        city.buildDistrict(Card.TOWN_HALL_1);
+        city.buildDistrict(Card.KEEP_1);
+        city.buildDistrict(Card.MARKET_2);
+        Possession possession = new Possession(0, null);
+        int score = city.score(possession);
+        if (board.isFirst(city) && city.isComplete()) {
+            Assertions.assertThat(score).isEqualTo(26);
+        }
     }
 }
