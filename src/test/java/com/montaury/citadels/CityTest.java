@@ -22,7 +22,7 @@ public class CityTest {
     }
 
     @Test
-    public void test_5_types_quartiers() {
+    public void test_quarters_5_types() {
         Possession possession = new Possession(0, null); // 0 or donc 0 score
         city.buildDistrict(Card.MANOR_1); // +3 score, type : NOBLE
         city.buildDistrict(Card.PRISON_2); // +2 score, type : MILITARY
@@ -36,7 +36,7 @@ public class CityTest {
     }
 
     @Test
-    public void test_bonus_carte_magique() {
+    public void test_bonus_magic_card() {
         Possession laPossession = new Possession(9, null);
         city.buildDistrict(UNIVERSITY);
         int score = city.score(laPossession);
@@ -44,7 +44,7 @@ public class CityTest {
     }
 
     @Test
-    public void test_construction_cout(){
+    public void test_construction_cost(){
         Possession possession = new Possession(0,null);
         city.buildDistrict(Card.MANOR_5); // +3
         city.buildDistrict(Card.TAVERN_5); // +1
