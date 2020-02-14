@@ -22,7 +22,7 @@ public class CityTest {
     }
 
     @Test
-    public void test_5_types_quartiers() {
+    public void test_quarters_5_types() {
         Possession possession = new Possession(0, null); // 0 or donc 0 score
         city.buildDistrict(Card.MANOR_1); // +3 score, type : NOBLE
         city.buildDistrict(Card.PRISON_2); // +2 score, type : MILITARY
