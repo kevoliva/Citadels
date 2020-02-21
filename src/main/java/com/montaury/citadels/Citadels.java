@@ -21,7 +21,11 @@ import io.vavr.collection.Set;
 import java.util.Collections;
 import java.util.Scanner;
 
+
 public class Citadels {
+    private static final String DRAW_2_CARDS_AND_KEEP_1 = "Draw 2 cards and keep 1";
+    private static final String DRAW_3_CARDS_AND_KEEP_1 = "Draw 3 cards and keep 1";
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello! Quel est votre nom ? ");
@@ -95,24 +99,24 @@ public class Citadels {
                         if (associations.get(ii).isMurdered()) {}else{
                             Group group = associations.get(ii);
                             associations.get(ii).thief().peek(thief -> thief.steal(group.player()));
-                            Set<String> baseActions = HashSet.of("Draw 2 cards and keep 1", "Receive 2 coins");
+                            Set<String> baseActions = HashSet.of(DRAW_2_CARDS_AND_KEEP_1, "Receive 2 coins");
                             List<District> districts = group.player().city().districts();
                             Set<String> availableActions = baseActions;
                             for (District d : districts) {
                                 if (d == District.OBSERVATORY) {
-                                    availableActions = availableActions.replace("Draw 2 cards and keep 1", "Draw 3 cards and keep 1");
+                                    availableActions = availableActions.replace(DRAW_2_CARDS_AND_KEEP_1, DRAW_3_CARDS_AND_KEEP_1);
                                 }
                             }
                             // keep only actions that player can realize
                             List<String> possibleActions = List.empty();
                             for (String action : availableActions) {
-                                if (action == "Draw 2 cards and keep 1") {
+                                if (action == DRAW_2_CARDS_AND_KEEP_1) {
                                     if (pioche.canDraw(2))
-                                    possibleActions = possibleActions.append("Draw 2 cards and keep 1");
+                                    possibleActions = possibleActions.append(DRAW_2_CARDS_AND_KEEP_1);
                                 }
-                                else if (action == "Draw 3 cards and keep 1") {
+                                else if (action == DRAW_3_CARDS_AND_KEEP_1) {
                                     if (pioche.canDraw(3))
-                                        possibleActions = possibleActions.append("Draw 2 cards and keep 1");
+                                        possibleActions = possibleActions.append(DRAW_2_CARDS_AND_KEEP_1);
                                 }
                                 else {
                                     possibleActions = possibleActions.append(action);
@@ -120,7 +124,7 @@ public class Citadels {
                             }
                             String actionType = group.player().controller.selectActionAmong(possibleActions.toList());
                             // execute selected action
-                            if (actionType == "Draw 2 cards and keep 1") {
+                            if (actionType == DRAW_2_CARDS_AND_KEEP_1) {
                                 Set<Card> cardsDrawn = pioche.draw(2);
                                 if (!group.player().city().has(District.LIBRARY)) {
                                     Card keptCard = group.player().controller.selectAmong(cardsDrawn);
@@ -132,7 +136,7 @@ public class Citadels {
                             else if (actionType == "Receive 2 coins") {
                                 group.player().add(2);
                             }
-                            else if (actionType == "Draw 3 cards and keep 1") {
+                            else if (actionType == DRAW_3_CARDS_AND_KEEP_1) {
                                 Set<Card> cardsDrawn = pioche.draw(3);
                                 if (!group.player().city().has(District.LIBRARY)) {
                                     Card keptCard = group.player().controller.selectAmong(cardsDrawn);
