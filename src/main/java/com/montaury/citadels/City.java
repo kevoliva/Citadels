@@ -31,22 +31,22 @@ public class City {
     }
 
     public int score(Possession possession) {
-        int score = 0;
+        Score score = new Score();
         for (int carte = 0; carte < districts().size(); carte++) {
-            score += districts().get(carte).cost();
+            score.setValue(score.getValue() + districts().get(carte).cost());
         }
 
-        score = score + districtsScoreBonus(possession);
+        score.setValue(score.getValue() + districtsScoreBonus(possession));
         if (winsAllColorBonus()) {
-            score += 3;
+            score.setValue(score.getValue() + 3);
         }
         if (board.isFirst(this)) {
-            score += (2);
+            score.setValue(score.getValue() + 2);
         }
         if (isComplete()) {
-            score += (2);
+            score.setValue(score.getValue() + 2);
         }
-        return score;
+        return score.getValue();
     }
 
     private int districtsScoreBonus(Possession possession) {
