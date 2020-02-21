@@ -66,4 +66,12 @@ public class CityTest {
             Assertions.assertThat(score).isEqualTo(26);
         }
     }
+
+    @Test
+    public void test_bonus_university(){
+        city.buildDistrict(UNIVERSITY);
+        Possession possession = new Possession(0, null);
+        int score = city.score(possession);
+        Assertions.assertThat(score).isEqualTo(8); // Coût : 6 / Bonus : 2 => 8 points
+    }
 }
