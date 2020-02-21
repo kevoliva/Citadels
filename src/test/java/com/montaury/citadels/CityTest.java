@@ -1,5 +1,6 @@
 package com.montaury.citadels;
 
+import com.montaury.citadels.character.Character;
 import com.montaury.citadels.district.Card;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
