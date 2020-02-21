@@ -62,9 +62,8 @@ public class CityTest {
         city.buildDistrict(Card.MARKET_2);
         Possession possession = new Possession(0, null);
         int score = city.score(possession);
-        if (board.isFirst(city) && city.isComplete()) {
-            Assertions.assertThat(score).isEqualTo(26);
-        }
+
+        Assertions.assertThat(score).isEqualTo(26);
     }
 
     @Test
@@ -73,5 +72,11 @@ public class CityTest {
         Possession possession = new Possession(0, null);
         int score = city.score(possession);
         Assertions.assertThat(score).isEqualTo(8); // Coût : 6 / Bonus : 2 => 8 points
+    }
+
+    @Test
+    public void should_destroy_bishop_if_he_died(){
+        Character character = new Character(8);
+        Character Uncharacter = new Character(5);
     }
 }

@@ -286,7 +286,11 @@ public class Citadels {
                                     }
                                     }
                                 else if (actionType1 == "Destroy district") {
-                                    // flemme...
+
+                                    Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD));
+
+                                   List<District> getDestructibleDistrict = getPlayerDestructibleDistrict();
+
                                 }
                                     else if (actionType1 == "Rob") {
                                     Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD)
@@ -312,6 +316,10 @@ public class Citadels {
         System.out.println("Classement: " + roundAssociations.sortBy(a -> Tuple.of(a.player().score(), !a.isMurdered(), a.character))
                 .reverse()
                 .map(Group::player));
+    }
+
+    public static List<District> getPlayerDestructibleDistrict() {
+        return null;
     }
 
     public static void actionExecuted(Group association, String actionType, List<Group> associations) {
