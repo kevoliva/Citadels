@@ -29,10 +29,8 @@ public class CityTest {
         city.buildDistrict(Card.TAVERN_2); // +1 score, type : TRADE
         city.buildDistrict(Card.CHURCH_3); // +2 score, type : RELIGIOUS
         city.buildDistrict(Card.UNIVERSITY); // +8 score, type : SPECIAL
-        city.buildDistrict(Card.PRISON_3); // +2 score, type : MILITARY
-        city.buildDistrict((Card.MANOR_2)); // +3 score, type : NOBLE
         int score = city.score(possession);
-        Assertions.assertThat(score).isEqualTo(24); // 21 + bonus des 5 types (+3) = 24
+        Assertions.assertThat(score).isEqualTo(19); // 16 + bonus des 5 types (+3) = 19
     }
 
     @Test
