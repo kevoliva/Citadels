@@ -75,9 +75,20 @@ public class CityTest {
         Assertions.assertThat(score).isEqualTo(8); // Coût : 6 / Bonus : 2 => 8 points
     }
 
+    // Test si la fonction "" retourne bien le bon nombre de quartiers possédés, en l'occurrence 8
     @Test
-    public void should_destroy_bishop_if_he_died(){
-        Character character = new Character(8);
-        Character Uncharacter = new Character(5);
+    public void test_full_quarter() {
+        int nbQuarters;
+        city.buildDistrict(MANOR_1);
+        city.buildDistrict(CASTLE_1);
+        city.buildDistrict(WATCHTOWER_1);
+        city.buildDistrict(PRISON_1);
+        city.buildDistrict(BATTLEFIELD_3);
+        city.buildDistrict(TAVERN_4);
+        city.buildDistrict(TRADING_POST_3);
+        city.buildDistrict(DOCKS_2);
+
+        nbQuarters = city.districts().size();
+        Assertions.assertThat(nbQuarters).isEqualTo(8);
     }
 }
