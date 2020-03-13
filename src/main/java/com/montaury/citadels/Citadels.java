@@ -58,7 +58,7 @@ public class Citadels {
             Collections.rotate(list, -players.indexOf(crown));
             List<Player> playersInOrder = List.ofAll(list);
             RandomCharacterSelector randomCharacterSelector = new RandomCharacterSelector();
-            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD);
+            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD, Character.ALCHEMIST);
 
             List<Character> availableCharacters1 = availableCharacters;
             List<Character> discardedCharacters = List.empty();
@@ -171,6 +171,9 @@ public class Citadels {
                             else if (group.character == Character.WARLORD) {
                                 powers = List.of("Receive income", "Destroy district");
                             }
+                            else if(group.character == Character.ALCHEMIST){
+                                powers = List.of("");
+                            }
                             else {
                                 System.out.println("Uh oh");
                             }
@@ -228,6 +231,9 @@ public class Citadels {
                                     {} else if (actionType1.equals("Build district")) {
                                     Card card = group.player().controller.selectAmong(group.player().buildableDistrictsInHand());
                                     group.player().buildDistrict(card);
+                                    if(group.character == Character.ALCHEMIST){
+                                        group.player().add(card.district().cost());
+                                    }
                                     }
                                     else if (actionType1.equals("Discard card for 2 coins")) {
                                     Player player = group.player();

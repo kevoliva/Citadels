@@ -1,6 +1,5 @@
 package com.montaury.citadels;
 
-import com.montaury.citadels.character.Character;
 import com.montaury.citadels.district.Card;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
@@ -75,7 +74,7 @@ public class CityTest {
         Assertions.assertThat(score).isEqualTo(8); // Coût : 6 / Bonus : 2 => 8 points
     }
 
-    // Test si la fonction "" retourne bien le bon nombre de quartiers possédés, en l'occurrence 8
+    // Test si la fonction "districts()" retourne bien le bon nombre de quartiers possédés, en l'occurrence 8
     @Test
     public void test_full_quarter() {
         int nbQuarters;
