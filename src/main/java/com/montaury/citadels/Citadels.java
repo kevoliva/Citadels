@@ -25,6 +25,12 @@ public class Citadels {
     private static final String DRAW_3_CARDS_AND_KEEP_1 = "Draw 3 cards and keep 1";
 
     public static void main(String[] args) {
+        List<Player> players = configGame();
+        play(players);
+        }
+
+
+    public static List<Player> configGame(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Hello! Quel est votre nom ? ");
         String playerName = scanner.next();
@@ -45,6 +51,10 @@ public class Citadels {
             players = players.append(player
             );
         }
+        return players;
+    }
+
+    public static void play(List<Player> players) {
         CardPile pioche = new CardPile(Card.all().toList().shuffle());
         players.forEach(player -> {
             player.add(2);
@@ -110,7 +120,7 @@ public class Citadels {
                             for (String action : availableActions) {
                                 if (action.equals(DRAW_2_CARDS_AND_KEEP_1)) {
                                     if (pioche.canDraw(2))
-                                    possibleActions = possibleActions.append(DRAW_2_CARDS_AND_KEEP_1);
+                                        possibleActions = possibleActions.append(DRAW_2_CARDS_AND_KEEP_1);
                                 }
                                 else if (action.equals(DRAW_3_CARDS_AND_KEEP_1)) {
                                     if (pioche.canDraw(3))
@@ -211,7 +221,7 @@ public class Citadels {
                                     }
                                     else if (action.equals("Draw 3 cards for 2 coins")) {
                                         if (pioche.canDraw(3) && group.player().canAfford(2))
-                                        possibleActions2 = possibleActions2.append("Draw 3 cards for 2 coins");
+                                            possibleActions2 = possibleActions2.append("Draw 3 cards for 2 coins");
                                     }
                                     else if (action.equals("Exchange cards with pile")) {
                                         if (!group.player().cards().isEmpty() && pioche.canDraw(1)) {
@@ -228,51 +238,51 @@ public class Citadels {
                                 String actionType1 = group.player().controller.selectActionAmong(possibleActions2.toList());
                                 // execute selected action
                                 if (actionType1.equals("End round"))
-                                    {} else if (actionType1.equals("Build district")) {
+                                {} else if (actionType1.equals("Build district")) {
                                     Card card = group.player().controller.selectAmong(group.player().buildableDistrictsInHand());
                                     group.player().buildDistrict(card);
                                     if(group.character == Character.ALCHEMIST){
                                         group.player().add(card.district().cost());
                                     }
-                                    }
-                                    else if (actionType1.equals("Discard card for 2 coins")) {
+                                }
+                                else if (actionType1.equals("Discard card for 2 coins")) {
                                     Player player = group.player();
                                     Card card = player.controller.selectAmong(player.cards());
                                     player.cards = player.cards().remove(card);
                                     pioche.discard(card);
                                     player.add(2);
-                                    }
-                                    else if (actionType1.equals("Draw 3 cards for 2 coins")) {
+                                }
+                                else if (actionType1.equals("Draw 3 cards for 2 coins")) {
                                     group.player().add(pioche.draw(3));
                                     group.player().pay(2);
-                                    }
-                                    else if (actionType1.equals("Exchange cards with pile")) {
+                                }
+                                else if (actionType1.equals("Exchange cards with pile")) {
                                     Set<Card> cardsToSwap = group.player().controller.selectManyAmong(group.player().cards());
                                     group.player().cards = group.player().cards().removeAll(cardsToSwap);
                                     group.player().add(pioche.swapWith(cardsToSwap.toList()));
-                                    }
-                                    else if (actionType1.equals("Exchange cards with other player")) {
+                                }
+                                else if (actionType1.equals("Exchange cards with other player")) {
                                     Player playerToSwapWith = group.player().controller.selectPlayerAmong(groups.associations.map(Group::player).remove(group.player()));
                                     group.player().exchangeHandWith(playerToSwapWith);
-                                    }
-                                    else if (actionType1.equals("Kill")) {
+                                }
+                                else if (actionType1.equals("Kill")) {
                                     Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD));
                                     groups.associationToCharacter(characterToMurder).peek(Group::murder);
-                                    }
-                                    else if (actionType1.equals("Pick 2 cards")) {
+                                }
+                                else if (actionType1.equals("Pick 2 cards")) {
                                     group.player().add(pioche.draw(2));
-                                    }
-                                    else if (actionType1.equals("Receive 2 coins")) {
+                                }
+                                else if (actionType1.equals("Receive 2 coins")) {
                                     group.player().add(2);
-                                    }
-                                    else if (actionType1.equals("Receive 1 gold")) {
+                                }
+                                else if (actionType1.equals("Receive 1 gold")) {
                                     group.player().add(1);
-                                    }
-                                    else if (actionType1.equals("Receive income")) {
+                                }
+                                else if (actionType1.equals("Receive income")) {
                                     DistrictType type = null;
                                     if (group.character == Character.BISHOP) {
-                                            type = DistrictType.RELIGIOUS;
-                                        }
+                                        type = DistrictType.RELIGIOUS;
+                                    }
                                     else if (group.character == Character.WARLORD) {
                                         type = DistrictType.MILITARY;
                                     }
@@ -292,15 +302,15 @@ public class Citadels {
                                             }
                                         }
                                     }
-                                    }
+                                }
                                 else if (actionType1.equals("Destroy district")) {
 
                                     Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD));
 
-                                   List<District> getDestructibleDistrict = getPlayerDestructibleDistrict();
+                                    List<District> getDestructibleDistrict = getPlayerDestructibleDistrict();
 
                                 }
-                                    else if (actionType1.equals("Rob")) {
+                                else if (actionType1.equals("Rob")) {
                                     Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD)
                                             .removeAll(groups.associations.find(Group::isMurdered).map(Group::character)));
                                     groups.associationToCharacter(character).peek(association -> association.stolenBy(group.player()));
@@ -318,9 +328,15 @@ public class Citadels {
             crown = roundAssociations.find(a -> a.character == Character.KING).map(Group::player).getOrElse(crown);
         } while (!players.map(Player::city).exists(City::isComplete));
 
+        showResult(roundAssociations);
+    }
+
+    public static void showResult(List<Group> roundAssociations) {
+
         // classe les joueurs par leur score
         // si ex-aequo, le premier est celui qui n'est pas assassiné
         // si pas d'assassiné, le gagnant est le joueur ayant eu le personnage avec le numéro d'ordre le plus petit au dernier tour
+
         System.out.println("Classement: " + roundAssociations.sortBy(a -> Tuple.of(a.player().score(), !a.isMurdered(), a.character))
                 .reverse()
                 .map(Group::player));
