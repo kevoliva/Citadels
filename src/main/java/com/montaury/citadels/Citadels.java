@@ -68,7 +68,7 @@ public class Citadels {
             Collections.rotate(list, -players.indexOf(crown));
             List<Player> playersInOrder = List.ofAll(list);
             RandomCharacterSelector randomCharacterSelector = new RandomCharacterSelector();
-            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD, Character.ALCHEMIST);
+            List<Character> availableCharacters = List.of(Character.ASSASSIN, Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.ALCHEMIST, Character.ARCHITECT, Character.WARLORD);
 
             List<Character> availableCharacters1 = availableCharacters;
             List<Character> discardedCharacters = List.empty();
@@ -172,9 +172,9 @@ public class Citadels {
                             else if (group.character == Character.BISHOP) {
                                 powers = List.of("Receive income");
                             }
-                            else if (group.character == Character.MERCHANT) {
+                           /* else if (group.character == Character.MERCHANT) {
                                 powers = List.of("Receive income", "Receive 1 gold");
-                            }
+                            }*/
                             else if (group.character == Character.ARCHITECT) {
                                 powers = List.of("Pick 2 cards", "Build district", "Build district");
                             }
@@ -266,7 +266,7 @@ public class Citadels {
                                     group.player().exchangeHandWith(playerToSwapWith);
                                 }
                                 else if (actionType1.equals("Kill")) {
-                                    Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD));
+                                    Character characterToMurder = group.player().controller.selectAmong(List.of(Character.THIEF, Character.MAGICIAN, Character.KING, Character.BISHOP, Character.ALCHEMIST, Character.ARCHITECT, Character.WARLORD));
                                     groups.associationToCharacter(characterToMurder).peek(Group::murder);
                                 }
                                 else if (actionType1.equals("Pick 2 cards")) {
@@ -289,9 +289,9 @@ public class Citadels {
                                     else if (group.character == Character.KING) {
                                         type = DistrictType.NOBLE;
                                     }
-                                    else if (group.character == Character.MERCHANT) {
+                                    /*else if (group.character == Character.MERCHANT) {
                                         type = DistrictType.TRADE;
-                                    }
+                                    }*/
                                     if (type != null) {
                                         for (District d : group.player().city().districts()) {
                                             if (d.districtType() == type) {
@@ -305,13 +305,13 @@ public class Citadels {
                                 }
                                 else if (actionType1.equals("Destroy district")) {
 
-                                    Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD));
+                                    Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.ALCHEMIST, Character.ARCHITECT, Character.WARLORD));
 
                                     List<District> getDestructibleDistrict = getPlayerDestructibleDistrict();
 
                                 }
                                 else if (actionType1.equals("Rob")) {
-                                    Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.MERCHANT, Character.ARCHITECT, Character.WARLORD)
+                                    Character character = group.player().controller.selectAmong(List.of(Character.MAGICIAN, Character.KING, Character.BISHOP, Character.ALCHEMIST, Character.ARCHITECT, Character.WARLORD)
                                             .removeAll(groups.associations.find(Group::isMurdered).map(Group::character)));
                                     groups.associationToCharacter(character).peek(association -> association.stolenBy(group.player()));
                                 }
