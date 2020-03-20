@@ -41,11 +41,11 @@ public class Citadels {
         p.human = true;
         List<Player> players = List.of(p);
         System.out.println("Saisir le nombre de joueurs total (entre 2 et 8): ");
-        int nbP;
+        int nbPersonnes;
         do {
-            nbP = scanner.nextInt();
-        } while (nbP < 2 || nbP > 8);
-        for (int joueurs = 0; joueurs < nbP; joueurs += 1) {
+            nbPersonnes = scanner.nextInt();
+        } while (nbPersonnes < 2 || nbPersonnes > 8);
+        for (int joueurs = 0; joueurs < nbPersonnes; joueurs += 1) {
             Player player = new Player("Computer " + joueurs, 35, new City(board), new ComputerController());
             player.computer = true;
             players = players.append(player
